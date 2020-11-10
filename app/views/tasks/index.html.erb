@@ -1,12 +1,23 @@
 <div class="container">
   <h1>My Tasks</h1>
-<ul>
-  <% @tasks.each do |task| %>
-    <li><%= link_to task.title, task_path(task) %>  <%= link_to "Delete", task_path(task),
-      method: :delete,
-      data: { confirm: "Are you sure?" } %></li>
+  <ul>
+    <% @tasks.each do |task| %>
+      <li class="d-flex m-1">
+        <div class="mr-2">
+          <%= form_for task do |f| %>
+            <%= f.check_box :completed %>
+          <% end %>
+        </div>
+        <div>
+          <%= link_to task.title, task_path(task) %> - <%= link_to "Delete", task_path(task), method: :delete, data: { confirm: "Are you sure?" } %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+  <%= link_to new_path do %>
+    <i class="fa fa-plus"></i> Add a new task
   <% end %>
-</ul>
-<p><%= link_to "Add a new task", new_path %></p>
 </div>
 
+<!-- <i class="fa fa-plus"></i>
+<i class="fa fa-pencil"></i> -->
